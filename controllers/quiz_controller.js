@@ -60,6 +60,7 @@ exports.new = function(req, res) {
 // POST /quizes/create
 exports.create = function(req, res) {
 	var quiz = models.Quiz.build( req.body.quiz );
+	quiz.tema = req.body.tema;
 
 	quiz
 	.validate()
@@ -70,7 +71,7 @@ exports.create = function(req, res) {
 			} else {
 				// save: guarda en DB cmapos pregunta y respuesta de quiz
 				quiz
-				.save({fields: ["pregunta", "respuesta"]})
+				.save({fields: ["tema", "pregunta", "respuesta"]})
 				.then( 
 					function() { 
 						res.redirect('/quizes')
@@ -92,7 +93,8 @@ exports.edit = function(req, res) {
 exports.update = function(req, res) {
 	req.quiz.pregunta 	= req.body.quiz.pregunta;
 	req.quiz.respuesta 	= req.body.quiz.respuesta;
-
+	req.quiz.tema 		= req.body.tema;
+	
 	req.quiz
 	.validate()
 	.then(
@@ -102,7 +104,7 @@ exports.update = function(req, res) {
 		} else {
 				// save: guarda en DB cmapos pregunta y respuesta de quiz
 				req.quiz
-				.save({fields: ["pregunta", "respuesta"]})
+				.save({fields: ["tema", "pregunta", "respuesta"]})
 				.then( 
 					function() { 
 						res.redirect('/quizes')
