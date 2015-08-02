@@ -30,7 +30,7 @@ exports.index = function(req, res, next) {
 	    search = '%';
 	};
 
-	models.Quiz.findAll({where: ["pregunta like ?", search]}).then(function(quizes) {
+	models.Quiz.findAll({where: ["pregunta LIKE ?", search]}).then(function(quizes) {
 		res.render('quizes/index', { quizes: quizes, errors: []});
 	}).catch(function(error) { next(error);}) 
 };
