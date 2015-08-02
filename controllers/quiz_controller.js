@@ -30,7 +30,7 @@ exports.index = function(req, res) {
 	    search = '%';
 	};
 
-	models.Quiz.findAll({where: ["pregunta like ?", search]}).then(function(quizes) {
+	models.Quiz.findAll({where: ["pregunta LIKE ?", search]}).then(function(quizes) {
 		res.render('quizes/index', { quizes: quizes, errors: []});
 	}).catch(function(error) { next(error);}) 
 };
@@ -94,7 +94,7 @@ exports.update = function(req, res) {
 	req.quiz.pregunta 	= req.body.quiz.pregunta;
 	req.quiz.respuesta 	= req.body.quiz.respuesta;
 	req.quiz.tema 		= req.body.tema;
-	
+
 	req.quiz
 	.validate()
 	.then(
