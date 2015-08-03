@@ -3,6 +3,7 @@ var router = express.Router();
 
 var quizController = require('../controllers/quiz_controller');
 var quizAuthor = require('../controllers/quiz_author');
+var commentController = require('../controllers/comment_controller');
 
 // Página de entrada (home page)
 router.get('/', function(req, res) {
@@ -24,5 +25,9 @@ router.delete('/quizes/:quizId(\\d+)',		quizController.destroy);
 
 // Definición de ruta para autores
 router.get('/authors', quizAuthor.authors); 
+
+// Definición de ruta para comentarios
+router.get('/quizes/:quizId(\\d+)/comments/new',	commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments',		commentController.create);
 
 module.exports = router;
