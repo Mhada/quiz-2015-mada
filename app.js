@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override'); // para transformar POST en PUT encapsulándolo
+var session = require('express-session');
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
@@ -25,9 +26,21 @@ app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.urlencoded()); // para recoger correctamente los parámetros de pregunta respuesta
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser('Quiz 2015')); // codificación aleatoria de cookies
+app.use(session());
 app.use(methodOverride('_method')); // mira si hay encapsulamiento en los querys de la acción
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Helpers dinámicos:
+app.use(function(req, res, next){
+    // Guardar path de la solicitud en session.redir para después de login
+    if(!req.path.match(/\/login|\/logout/)) {
+        req.session.redir = req.path;
+    }
+    // Hacer visible req.session en las vistas. Hacer accesible a las vistas
+    res.locals.session = req.session;
+    next();
+});
 
 app.use('/', routes);
 // app.use('/users', users);
