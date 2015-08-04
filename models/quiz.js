@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
 		'Quiz', 
 		{ 	tema: {
 				type: DataTypes.ENUM,
-                values: ['humanidades','ocio','ciencia','tecnologia']
+                values: ['otros','humanidades','ocio','ciencia','tecnologia']
 			},
 			pregunta:  { 
 				type: DataTypes.STRING, 

@@ -1,21 +1,26 @@
 <label for="tematica" class="tem">Tematica:</label>
 <select name="tema">
-  <% if (quiz.tema === 'humanidades') { %>
+  <% if (quiz.tema === 'otros') { %>
+    <option value="otros" selected>Otros</option>
+  <% } else { %>
+    <option value="otros">Otros</option>
+  <% }
+    if (quiz.tema === 'humanidades') { %>
     <option value="humanidades" selected>Humanidades</option>
   <% } else { %>
     <option value="humanidades">Humanidades</option>
   <% }
-       if (quiz.tema === 'ocio') { %>
+    if (quiz.tema === 'ocio') { %>
     <option value="ocio" selected>Ocio</option>
   <% } else { %>
     <option value="ocio">Ocio</option>
   <% }
-       if (quiz.tema === 'ciencia') { %>
+    if (quiz.tema === 'ciencia') { %>
     <option value="ciencia" selected>Ciencia</option>
   <% } else { %>
     <option value="ciencia">Ciencia</option>
   <% }
-       if (quiz.tema === 'tecnologia') { %>
+    if (quiz.tema === 'tecnologia') { %>
     <option value="tecnologia" selected>Tecnología</option>
   <% } else { %>
     <option value="tecnologia">Tecnología</option>
