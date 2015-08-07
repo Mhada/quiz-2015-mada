@@ -1,5 +1,7 @@
 // MW de autorización de accesos HTTP restringidoos
 exports.loginRequired = function(req, res, next){
+	console.log("entra en loginRequired");
+	console.log(req.session);
 	if (req.session.user){
 		next();
 	} else {
@@ -28,9 +30,9 @@ exports.create = function(req, res){
 				res.redirect("/login");
 				return;  // acaba la ejecución
 			}
-		// Crear res.session.user y guardar campos id y usermana
+		// Crear res.session.user y guardar campos id y user
 		// La sesión se define por la existencia de: req.session.user
-		req.session.user = { id: user.id, usermane: user.usermane };
+		req.session.user = { id: user.id, username: user.username };
 		res.redirect(req.session.redir.toString()); // redirección a ruta anterior
 		}
 	);
