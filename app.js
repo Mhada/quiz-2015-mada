@@ -39,7 +39,29 @@ app.use(function(req, res, next){
     }
     // Hacer visible req.session en las vistas. Hacer accesible a las vistas
     res.locals.session = req.session;
+    // Pasa al siguente middleware
     next();
+});
+
+// Middleware de auto-logout
+app.use(function(req, res, next) {
+    if (req.session.user && req.session.user.timeStamp){
+        if(new Date().getTime() - req.session.user.timeStamp > 60*1000*2){
+            delete req.session.user;
+            req.session.logout = 'La sesión ha caducado, vuelva a iniciar sesión.';
+            res.redirect(req.session.redir.toString());
+        } else {
+            next();
+        }
+    } else {
+        if(req.session.user) {
+            req.session.user.timeStamp = new Date().getTime();
+            if(req.session.logout){
+            delete req.session.logout;
+        }
+    }
+    next();
+    }
 });
 
 app.use('/', routes);
