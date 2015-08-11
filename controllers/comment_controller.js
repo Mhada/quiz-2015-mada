@@ -2,7 +2,6 @@ var models = require('../models/models.js');
 
 // Autoload :id de comentarios
 exports.load = function(req, res, next, commentId){
-	console.log(commentId);
 	models.Comment
 		.find({
 			where: {
@@ -58,7 +57,6 @@ exports.create = function(req, res) {
 // GET /quizes/:quizId/comments/:commentId/publish
 exports.publish = function(req, res){
 	req.comment.publicado = true;
-	console.log("entra de publish");
 
 	req.comment.save( {fields: ["publicado"]} )
 	.then(

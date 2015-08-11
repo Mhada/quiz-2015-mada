@@ -1,7 +1,5 @@
 // MW de autorización de accesos HTTP restringidoos
 exports.loginRequired = function(req, res, next){
-	console.log("entra en loginRequired");
-	console.log(req.session);
 	if (req.session.user){
 		next();
 	} else {
