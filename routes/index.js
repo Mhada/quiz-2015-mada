@@ -5,6 +5,8 @@ var quizController = require('../controllers/quiz_controller');
 var quizAuthor = require('../controllers/quiz_author');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+// Definición de ruta para las estadísticas
+var statisticsController = require('../controllers/statistics_controller');
 
 // Página de entrada (home page)
 router.get('/', function(req, res) {
@@ -29,6 +31,9 @@ router.post('/quizes/create', 				sessionController.loginRequired, quizControlle
 router.get('/quizes/:quizId(\\d+)/edit',	sessionController.loginRequired, quizController.edit);
 router.put('/quizes/:quizId(\\d+)',			sessionController.loginRequired, quizController.update);
 router.delete('/quizes/:quizId(\\d+)',		sessionController.loginRequired, quizController.destroy);
+
+// GET /quizes/statistics
+router.get('/quizes/statistics',          statisticsController.index, statisticsController.statistics);
 
 // Definición de ruta para autores
 router.get('/authors', quizAuthor.authors); 
